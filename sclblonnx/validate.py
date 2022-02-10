@@ -1,10 +1,10 @@
-import onnxoptimizer
+# import onnxoptimizer
 from onnx import __version__ as xversion
 from onnx import checker
 import onnx
 from onnx import helper as xhelp
 from onnx import onnx_ml_pb2 as xpb2
-from onnxsim import simplify
+# from onnxsim import simplify
 from packaging import version
 
 import sclblonnx._globals as glob
@@ -52,19 +52,19 @@ def clean(
         _print("Unable to create the model: " + str(e))
         return graph
 
-    if _optimize:
-        try:
-            mod = onnxoptimizer.optimize(mod, glob.OPTIMIZER_PASSES, **kwargs)
-        except Exception as e:
-            _print("Unable to optimize your model: " + str(e))
-            return graph
+#     if _optimize:
+#         try:
+#             mod = onnxoptimizer.optimize(mod, glob.OPTIMIZER_PASSES, **kwargs)
+#         except Exception as e:
+#             _print("Unable to optimize your model: " + str(e))
+#             return graph
 
-    if _simplify:
-        try:
-            mod, _ = simplify(mod, **kwargs)
-        except Exception as e:
-            _print("Unable to simplify your model: " + str(e))
-            return graph
+#     if _simplify:
+#         try:
+#             mod, _ = simplify(mod, **kwargs)
+#         except Exception as e:
+#             _print("Unable to simplify your model: " + str(e))
+#             return graph
 
     # From: onnxruntime/tools/python/remove_initializer_from_input.py
     graph = mod.graph
