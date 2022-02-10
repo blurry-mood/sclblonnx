@@ -1,4 +1,4 @@
-import onnxoptimizer
+# import onnxoptimizer
 from onnx import __version__ as xversion
 from onnx import checker
 import onnx
@@ -54,7 +54,8 @@ def clean(
 
     if _optimize:
         try:
-            mod = onnxoptimizer.optimize(mod, glob.OPTIMIZER_PASSES, **kwargs)
+            pass
+            # mod = onnxoptimizer.optimize(mod, glob.OPTIMIZER_PASSES, **kwargs)
         except Exception as e:
             _print("Unable to optimize your model: " + str(e))
             return graph
