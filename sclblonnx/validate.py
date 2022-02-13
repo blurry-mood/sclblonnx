@@ -4,7 +4,7 @@ from onnx import checker
 import onnx
 from onnx import helper as xhelp
 from onnx import onnx_ml_pb2 as xpb2
-from onnxsim import simplify
+# from onnxsim import simplify
 from packaging import version
 
 import sclblonnx._globals as glob
@@ -60,12 +60,12 @@ def clean(
             _print("Unable to optimize your model: " + str(e))
             return graph
 
-    if _simplify:
-        try:
-            mod, _ = simplify(mod, **kwargs)
-        except Exception as e:
-            _print("Unable to simplify your model: " + str(e))
-            return graph
+    # if _simplify:
+    #     try:
+    #         mod, _ = simplify(mod, **kwargs)
+    #     except Exception as e:
+    #         _print("Unable to simplify your model: " + str(e))
+    #         return graph
 
     # From: onnxruntime/tools/python/remove_initializer_from_input.py
     graph = mod.graph
@@ -155,11 +155,11 @@ def check(
                 glob.ONNX_VERSION_INFO['onnx_version']['version_min']))
             return False
 
-        if version.parse(xversion) > version.parse(glob.ONNX_VERSION_INFO['onnx_version']['version_max']):
-            _print(
-                "Your current onnx version is higher then our support max. Please downgrade your ONNX version to {}".format(
-                    glob.ONNX_VERSION_INFO['onnx_version']['version_max']))
-            return False
+        # if version.parse(xversion) > version.parse(glob.ONNX_VERSION_INFO['onnx_version']['version_max']):
+        #     _print(
+        #         "Your current onnx version is higher then our support max. Please downgrade your ONNX version to {}".format(
+        #             glob.ONNX_VERSION_INFO['onnx_version']['version_max']))
+        #     return False
 
         if mod.ir_version < glob.ONNX_VERSION_INFO['onnx_version']['ir_version_min']:
             _print("Your current IR version is lower then our support minimum. Please update to {}".format(
